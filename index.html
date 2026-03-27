@@ -51,19 +51,22 @@
   <ul id="list"></ul>
   <script>
     const apps = [
-      { name: "jdict",    port: 8016 },
-      { name: "transpod", port: 8014 },
-      { name: "player", port: 8013 },
-      { name: "replay", port: 3333 },
-      { name: "portainer", port: 9443 },
-      { name: "shopping", port: 3001 },
+      { name: "jdict",     port: 8016 },
+      { name: "transpod",  port: 8014 },
+      { name: "player",    port: 8013 },
+      { name: "replay",    port: 3333 },
+      { name: "portainer", port: 9443, proto: "https" },
+      { name: "shopping",  port: 3001 },
+      { name: "vaultwarden", url: "https://box.tail8a2664.ts.net." },
     ];
     const host = window.location.hostname;
     const ul = document.getElementById("list");
-    apps.forEach(({ name, port }) => {
+    apps.forEach(({ name, port, proto, url }) => {
+      const href = url ?? `${proto ?? "http"}://${host}:${port}`;
+      const label = url ? new URL(url).host : `:${port}`;
       ul.insertAdjacentHTML("beforeend",
-        `<li><a href="http://${host}:${port}" target="_blank">
-          <span class="name">${name}</span><span class="port">:${port}</span>
+        `<li><a href="${href}" target="_blank">
+          <span class="name">${name}</span><span class="port">${label}</span>
         </a></li>`
       );
     });
