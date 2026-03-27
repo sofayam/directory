@@ -48,10 +48,21 @@
 </head>
 <body>
   <h1>My Scruffy PWAs</h1>
-  <ul>
-    <!-- Add your apps here. Example entries: -->
-    <li><a href="http://localhost:8016" target="_blank"><span class="name">jdict</span><span class="port">:8016</span></a></li>
-    <li><a href="http://localhost:8014" target="_blank"><span class="name">transpod</span><span class="port">:8014</span></a></li>
-  </ul>
+  <ul id="list"></ul>
+  <script>
+    const apps = [
+      { name: "jdict",    port: 8016 },
+      { name: "transpod", port: 8014 },
+    ];
+    const host = window.location.hostname;
+    const ul = document.getElementById("list");
+    apps.forEach(({ name, port }) => {
+      ul.insertAdjacentHTML("beforeend",
+        `<li><a href="http://${host}:${port}" target="_blank">
+          <span class="name">${name}</span><span class="port">:${port}</span>
+        </a></li>`
+      );
+    });
+  </script>
 </body>
 </html>
