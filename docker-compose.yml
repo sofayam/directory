@@ -3,4 +3,8 @@ services:
     build: .
     ports:
       - "80:80"
+    # Mount local index.html into the nginx container for live editing.
+    # This overrides the copied file from the Docker image.
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html:ro
     restart: unless-stopped
